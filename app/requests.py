@@ -35,4 +35,25 @@ def get_newsource(category):
             newsource_results_list = get_newsource_response['sources']
             newsource_results = process_results(newsource_results_list)
 
-    return newsource_results    
+    return newsource_results
+
+def process_results(newsource_list):
+    '''
+    Function  that processes the new source result and transform them to a list of Objects
+    Args:
+        newsource_list: A list of dictionaries that contain news source details
+    Returns :
+        newsource_results: A list of newsource objects
+    '''
+    newsource_results = []
+    for news_item in newsource_list:
+        id = news_item.get('id')
+        name = news_item.get('title')
+        title = news_item.get('name')
+        description = news_item.get('description')
+        url = news_item.get('url')
+
+        newsource_object = Source(id,title,name,description,url)
+        newsource_results.append(newsource_object)
+
+    return newsource_results
